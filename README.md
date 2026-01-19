@@ -8,50 +8,13 @@ This RAG system combines the power of document retrieval with language model gen
 
 ### Key Features
 
-- 📄 **PDF Document Processing**: Robust text extraction from financial PDFs
-- 🔍 **Intelligent Retrieval**: Semantic search using sentence transformers
-- 🤖 **AI-Powered Q&A**: Context-aware answer generation with FLAN-T5
-- 📊 **Source Citations**: Proper attribution with page numbers and document references
-- 🌐 **Web Interface**: Clean, intuitive Streamlit-based user interface
-- 💾 **Persistent Storage**: ChromaDB vector database for efficient retrieval
+-  **PDF Document Processing**: Robust text extraction from financial PDFs
+-  **Intelligent Retrieval**: Semantic search using sentence transformers
+-  **AI-Powered Q&A**: Context-aware answer generation with FLAN-T5
+-  **Source Citations**: Proper attribution with page numbers and document references
+-  **Web Interface**: Clean, intuitive Streamlit-based user interface
+-  **Persistent Storage**: ChromaDB vector database for efficient retrieval
 
-## 🏗️ Architecture Overview
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                      Financial RAG System                       │
-├─────────────────────────────────────────────────────────────────┤
-│  📱 Streamlit UI (app.py)                                     │
-│  ├─ User Interface                                             │
-│  ├─ Question Input                                             │
-│  ├─ Answer Display                                             │
-│  └─ Source Citations                                           │
-├─────────────────────────────────────────────────────────────────┤
-│  🧠 RAG Pipeline (rag_pipeline.py)                            │
-│  ├─ Query Processing                                           │
-│  ├─ Context Retrieval                                          │
-│  ├─ Answer Generation                                          │
-│  └─ Response Formatting                                        │
-├─────────────────────────────────────────────────────────────────┤
-│  📊 Document Processing (document_processor.py)               │
-│  ├─ PDF Text Extraction                                        │
-│  ├─ Text Cleaning                                              │
-│  ├─ Chunking Strategy                                          │
-│  └─ Metadata Extraction                                        │
-├─────────────────────────────────────────────────────────────────┤
-│  🔍 Embeddings & Vector Store (embeddings.py)                │
-│  ├─ SentenceTransformer Embeddings                            │
-│  ├─ ChromaDB Vector Store                                      │
-│  ├─ Similarity Search                                          │
-│  └─ Document Management                                        │
-├─────────────────────────────────────────────────────────────────┤
-│  🛠️ Utilities (utils.py)                                      │
-│  ├─ File Management                                            │
-│  ├─ Text Processing                                            │
-│  ├─ Logging & Monitoring                                       │
-│  └─ Configuration                                              │
-└─────────────────────────────────────────────────────────────────┘
-```
 
 ## 📋 Design Choices
 
