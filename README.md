@@ -244,66 +244,6 @@ data/
    streamlit run app.py
    ```
 
-### 🌐 **Accessing the Application**
-
-The application will automatically open in your web browser at:
-```
-http://localhost:8501
-```
-
-If it doesn't open automatically, manually navigate to the URL above.
-
-### Using the System
-
-1. **Initialize the System**:
-   - Click "🚀 Initialize System" in the sidebar
-   - Wait for models to load (may take 2-5 minutes on first run)
-
-2. **Process Documents**:
-   - Ensure PDF files are in the `data/` directory
-   - Click "📊 Process Documents" in the sidebar
-   - Wait for processing to complete
-
-3. **Ask Questions**:
-   - Enter your question in the text input
-   - Click "🔍 Get Answer"
-   - Review the answer and source citations
-
-4. **Example Questions**:
-   - "What was the total revenue for 2023?"
-   - "How much debt does the company have?"
-   - "What are the main operating expenses?"
-   - "What is the profit margin trend?"
-   - "How did Q4 performance compare to Q3?"
-
-### Configuration Options
-
-- **Number of Sources**: Adjust how many source documents to retrieve
-- **Confidence Scores**: Toggle display of confidence metrics
-- **Source Details**: Show/hide detailed source information
-
-## 🔧 Technical Details
-
-### Document Processing Pipeline
-
-1. **PDF Extraction**: Extract text using pdfplumber
-2. **Text Cleaning**: Remove headers, footers, normalize whitespace
-3. **Chunking**: Split into 1000-word chunks with 200-word overlap
-4. **Metadata**: Add source file, page numbers, chunk indices
-
-### Embedding and Retrieval
-
-1. **Vectorization**: Convert text chunks to embeddings using SentenceTransformers
-2. **Storage**: Store embeddings in ChromaDB with metadata
-3. **Search**: Perform cosine similarity search for relevant chunks
-4. **Filtering**: Apply similarity threshold to ensure relevance
-
-### Answer Generation
-
-1. **Context Assembly**: Combine retrieved chunks with source information
-2. **Prompt Engineering**: Structure prompt for optimal LLM performance
-3. **Generation**: Use FLAN-T5 to generate grounded answers
-4. **Post-processing**: Format response with proper citations
 
 ## 🎛️ Configuration
 
@@ -339,32 +279,6 @@ DEFAULT_OVERLAP = 200
 DEFAULT_MODEL_NAME = "google/flan-t5-base"
 DEFAULT_EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 ```
-
-## 🔍 Testing
-
-### Test Questions
-
-Use these questions to validate system performance:
-
-1. **Questions with Clear Answers**:
-   - "What is the total revenue?"
-   - "How much cash does the company have?"
-
-2. **Questions Requiring Calculation**:
-   - "What is the profit margin?"
-   - "How much did expenses increase?"
-
-3. **Questions with No Answers**:
-   - "What is the CEO's favorite color?"
-   - "What will revenue be next year?"
-
-### Expected Behavior
-
-- **Clear Answers**: Should provide accurate information with sources
-- **Calculations**: Should extract relevant numbers and context
-- **No Answers**: Should respond with "I cannot answer this question based on the provided documents"
-
-## 🛠️ Troubleshooting
 
 ### SSL Certificate Issues
 
@@ -416,123 +330,6 @@ If the system is slow:
 2. **Use GPU** if available (CUDA-enabled PyTorch)
 3. **Reduce number of retrieved chunks** in the UI settings
 
-## 🚨 Challenges & Solutions
-
-### Challenge 1: PDF Text Extraction Quality
-
-**Problem**: Complex financial documents with tables, charts, and multi-column layouts
-**Solution**: 
-- Used pdfplumber for better layout handling
-- Implemented text cleaning to remove artifacts
-- Added error handling for corrupted PDFs
-
-### Challenge 2: Context Window Limitations
-
-**Problem**: FLAN-T5 has limited input context length
-**Solution**:
-- Implemented context truncation strategy
-- Prioritized most relevant chunks
-- Balanced context richness with model limitations
-
-### Challenge 3: SSL Certificate Issues
-
-**Problem**: Corporate networks and firewalls causing SSL verification failures
-**Solution**:
-- Implemented multiple fallback strategies for model loading
-- Added TF-IDF-based embedding fallback for offline use
-- Created automated scripts that handle SSL configuration
-- Provided model pre-download capability
-
-### Challenge 4: Chunking Strategy Optimization
-
-**Problem**: Balancing context preservation with retrieval accuracy
-**Solution**:
-- Experimented with different chunk sizes
-- Added overlap to prevent information loss
-- Attempted sentence boundary splitting
-
-### Challenge 5: Answer Quality and Grounding
-
-**Problem**: Ensuring answers are factually grounded in documents
-**Solution**:
-- Engineered prompts to emphasize document grounding
-- Added fallback responses for unknown information
-- Implemented confidence scoring based on similarity
-
-### Challenge 6: Performance Optimization
-
-**Problem**: Initial document processing and query response times
-**Solution**:
-- Cached model initialization using Streamlit
-- Implemented progress bars for user feedback
-- Optimized embedding generation with batch processing
-- Added model pre-downloading for faster startup
-
-## 📊 Performance Metrics
-
-### Document Processing
-
-- **Average Processing Time**: 2-5 minutes for 10-20 page documents
-- **Chunk Generation**: ~50-100 chunks per document
-- **Memory Usage**: ~2-4GB during processing
-
-### Query Performance
-
-- **Average Response Time**: 5-10 seconds per query
-- **Retrieval Accuracy**: 80-90% relevant chunks retrieved
-- **Context Utilization**: 70-80% of retrieved context used
-
-### System Requirements
-
-- **Minimum RAM**: 4GB
-- **Recommended RAM**: 8GB+
-- **Storage**: 2GB+ (models + vector store)
-- **CPU**: Multi-core recommended for faster processing
-
-## 🔮 Future Enhancements
-
-### Planned Features
-
-1. **Advanced Analytics**:
-   - Trend analysis across multiple documents
-   - Financial ratio calculations
-   - Comparative analysis between periods
-
-2. **Multi-Modal Support**:
-   - Chart and graph extraction
-   - Image analysis for financial visualizations
-   - Table structure preservation
-
-3. **Enhanced UI**:
-   - Conversation history
-   - Bookmarking important Q&A pairs
-   - Export functionality for reports
-
-4. **Model Improvements**:
-   - Fine-tuning on financial domain
-   - Larger model variants for better accuracy
-   - Custom prompt templates
-
-### Technical Improvements
-
-1. **Scalability**:
-   - Batch processing for multiple documents
-   - Distributed embedding generation
-   - Database optimization
-
-2. **Accuracy**:
-   - Hybrid retrieval (semantic + keyword)
-   - Re-ranking mechanisms
-   - Answer verification systems
-
-3. **User Experience**:
-   - Real-time processing feedback
-   - Intelligent question suggestions
-   - Error recovery mechanisms
-
-## 🤝 Contributing
-
-We welcome contributions! Please follow these guidelines:
 
 1. **Fork the repository**
 2. **Create a feature branch**: `git checkout -b feature/new-feature`
@@ -559,22 +356,5 @@ flake8 src/
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
 
-- **Hugging Face**: For providing the transformer models
-- **ChromaDB**: For the vector database solution
-- **Streamlit**: For the web framework
-- **pdfplumber**: For PDF processing capabilities
-- **SentenceTransformers**: For embedding generation
 
-## 📞 Support
-
-For questions, issues, or suggestions:
-
-1. **GitHub Issues**: Create an issue for bugs or feature requests
-2. **Discussions**: Use GitHub Discussions for general questions
-3. **Documentation**: Check this README and code comments
-
----
-
-**Happy Financial Analysis! 💰📊** 
